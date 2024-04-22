@@ -1,4 +1,4 @@
-package com.projeto.loja.proejto;
+package com.projeto.loja.projeto;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
