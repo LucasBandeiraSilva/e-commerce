@@ -36,11 +36,15 @@ public class TokenService {
 
     private String validarToken(String token){
         Algorithm algoritmo = Algorithm.HMAC256(secretKey);
-        return JWT.require(algoritmo)
-                .withIssuer("B&L-auth-api")
-                .build()
-                .verify(token)
-                .getSubject();
+        try{
+            return JWT.require(algoritmo)
+                    .withIssuer("B&L-auth-api")
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        }catch (Exception e){
+            return null;
+        }
     }
 
     private Instant gerarExpiracao(){
