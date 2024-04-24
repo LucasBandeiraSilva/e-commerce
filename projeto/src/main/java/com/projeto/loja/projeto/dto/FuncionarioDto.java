@@ -11,7 +11,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public record UsuarioDto(
+public record FuncionarioDto(
         @Size(max = 100, message = "name must be shorter") @NotBlank(message = "name must not be null") String nome,
 
         @Size(max = 150, message = "e-mail must be shorter") @Email(message = "email invalid") String email,

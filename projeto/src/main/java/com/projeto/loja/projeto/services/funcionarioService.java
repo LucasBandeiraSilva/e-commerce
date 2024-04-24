@@ -8,21 +8,20 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projeto.loja.projeto.dto.UsuarioDto;
+import com.projeto.loja.projeto.dto.FuncionarioDto;
 import com.projeto.loja.projeto.model.Funcionario;
-import com.projeto.loja.projeto.repositorios.FuncionarioRepository;
+import com.projeto.loja.projeto.repositories.FuncionarioRepository;
 
 @Service
 public class funcionarioService {
 
-    //TODO: Tratar possiveis erros e exceções
 
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
-    public Funcionario createFuncionario(UsuarioDto usuarioDto) {
+    public Funcionario createFuncionario(FuncionarioDto funcionarioDto) {
         var funcionario = new Funcionario();
-        BeanUtils.copyProperties(usuarioDto, funcionario);
+        BeanUtils.copyProperties(funcionarioDto, funcionario);
         funcionarioRepository.save(funcionario);
         funcionario.setAtivo(true);
         return funcionario;
@@ -37,16 +36,16 @@ public class funcionarioService {
         return funcionarioRepository.findById(id).get();
     }
 
-    public Funcionario updateFuncionario(Long id, UsuarioDto usuarioDto) {
+    public Funcionario updateFuncionario(Long id, FuncionarioDto funcionarioDto) {
         Optional<Funcionario> funcionarioOptional = funcionarioRepository.findById(id);
 
         if (funcionarioOptional.isPresent()) {
             Funcionario funcionario = funcionarioOptional.get();
-            BeanUtils.copyProperties(usuarioDto, funcionario);
+            BeanUtils.copyProperties(funcionarioDto, funcionario);
             funcionarioRepository.save(funcionario);
             return funcionario;
         }
-        return null; //TODO: Tratar erro de não encontrado
+        return null; 
     }
 
     public void deleteUser(Long id) {
