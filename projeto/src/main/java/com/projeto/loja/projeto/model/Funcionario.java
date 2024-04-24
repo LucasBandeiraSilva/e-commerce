@@ -1,12 +1,7 @@
 package com.projeto.loja.projeto.model;
 
 import com.projeto.loja.projeto.model.enums.RoleUser;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,12 +20,21 @@ import static com.projeto.loja.projeto.model.enums.RoleUser.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Funcionario extends Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Enumerated(EnumType.STRING)
     private RoleUser role;
     private boolean ativo;
+
+    @Transient
+    private String login;
+
+    public String getLogin(){
+        return getEmail();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
