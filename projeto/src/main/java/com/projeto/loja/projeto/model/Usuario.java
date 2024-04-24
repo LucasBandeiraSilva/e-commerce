@@ -3,11 +3,12 @@ package com.projeto.loja.projeto.model;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Usuario {
+public abstract class Usuario implements UserDetails {
 
     private String nome;
 
