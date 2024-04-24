@@ -26,6 +26,6 @@ public class Funcionario extends Usuario {
     //@NotBlank
     @Enumerated(EnumType.STRING)
     private RoleUser role;
-    private boolean status;
+    private boolean ativo;
 
 }
