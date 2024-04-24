@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping(value = "/funcionarios")
 public class FuncionarioController {
+
     @Autowired
     private FuncionarioService funcionarioService;
 
