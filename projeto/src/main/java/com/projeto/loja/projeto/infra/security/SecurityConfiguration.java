@@ -26,6 +26,7 @@ public class SecurityConfiguration {
                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                .authorizeHttpRequests(authorize -> {
                    authorize.requestMatchers("/funcionarios/**").hasRole("ADMIN");
+                   authorize.anyRequest().permitAll();
                })
                .build();
     }
