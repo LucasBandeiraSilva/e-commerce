@@ -19,6 +19,7 @@ import static com.projeto.loja.projeto.model.enums.RoleUser.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "funcionarios")
 public class Funcionario extends Usuario {
 
     @Id

@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.projeto.loja.projeto.dto.FuncionarioDto;
+import com.projeto.loja.projeto.dto.FuncionarioDTO;
 import com.projeto.loja.projeto.model.Funcionario;
 import com.projeto.loja.projeto.services.FuncionarioService;
 
@@ -30,7 +30,7 @@ public class FuncionarioController {
     private FuncionarioService funcionarioService;
 
     @PostMapping()
-    public ResponseEntity<Funcionario> create(@RequestBody @Valid FuncionarioDto funcionarioDto) {
+    public ResponseEntity<Funcionario> create(@RequestBody @Valid FuncionarioDTO funcionarioDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioService.createFuncionario(funcionarioDto));
     }
 
@@ -44,7 +44,7 @@ public class FuncionarioController {
         return ResponseEntity.status(HttpStatus.FOUND).body(funcionarioService.findById(id));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Funcionario> updateFuncario(@PathVariable Long id, @RequestBody FuncionarioDto funcionarioDto){
+    public ResponseEntity<Funcionario> updateFuncario(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDto){
         return ResponseEntity.status(HttpStatus.OK).body(funcionarioService.updateFuncionario(id, funcionarioDto));
     }
     @DeleteMapping("{id}")

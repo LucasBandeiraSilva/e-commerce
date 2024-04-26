@@ -5,9 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.projeto.loja.projeto.dto.FuncionarioDto;
+import com.projeto.loja.projeto.dto.FuncionarioDTO;
 import com.projeto.loja.projeto.model.Funcionario;
 import com.projeto.loja.projeto.repositories.FuncionarioRepository;
 
@@ -18,12 +19,12 @@ public class FuncionarioService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
-    public Funcionario createFuncionario(FuncionarioDto funcionarioDto) {
+    public Funcionario createFuncionario(FuncionarioDTO funcionarioDto) {
         var funcionario = new Funcionario();
         BeanUtils.copyProperties(funcionarioDto, funcionario);
-        funcionarioRepository.save(funcionario);
         funcionario.setAtivo(true);
-        return funcionario;
+        funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionarioDto.senha()));
+        return funcionarioRepository.save(funcionario);
     }
 
     public List<Funcionario> findAll() {
@@ -35,7 +36,7 @@ public class FuncionarioService {
         return funcionarioRepository.findById(id).get();
     }
 
-    public Funcionario updateFuncionario(Long id, FuncionarioDto funcionarioDto) {
+    public Funcionario updateFuncionario(Long id, FuncionarioDTO funcionarioDto) {
         Optional<Funcionario> funcionarioOptional = funcionarioRepository.findById(id);
 
         if (funcionarioOptional.isPresent()) {

@@ -1,5 +1,6 @@
 package com.projeto.loja.projeto.infra.security;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,12 +12,16 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.*;
 
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfiguration {
+
+    private SecurityFilter securityFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -27,9 +32,11 @@ public class SecurityConfiguration {
                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                .authorizeHttpRequests(authorize -> {
-                   //authorize.requestMatchers("/funcionarios/**").hasRole("ADMIN");
-                   authorize.anyRequest().permitAll();
+                   authorize.requestMatchers("/auth/login").permitAll();
+                   authorize.requestMatchers("/funcionarios/**").hasRole("ADMIN");
+                   authorize.anyRequest().authenticated();
                })
+               .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                .build();
     }
 
