@@ -3,7 +3,6 @@ package com.projeto.loja.projeto.controllers;
 import com.projeto.loja.projeto.dto.AuthenticationDTO;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import lombok.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
