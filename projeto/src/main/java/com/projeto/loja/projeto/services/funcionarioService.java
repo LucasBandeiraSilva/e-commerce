@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projeto.loja.projeto.dto.FuncionarioDto;
+import com.projeto.loja.projeto.exceptions.FuncionarioNotFoundException;
 import com.projeto.loja.projeto.model.Funcionario;
 import com.projeto.loja.projeto.repositories.FuncionarioRepository;
 
 @Service
-public class funcionarioService {
+public class FuncionarioService {
 
 
     @Autowired
@@ -33,7 +34,7 @@ public class funcionarioService {
     }
 
     public Funcionario findById(Long id) {
-        return funcionarioRepository.findById(id).get();
+        return funcionarioRepository.findById(id).orElseThrow(()-> new FuncionarioNotFoundException("Id não encontrado"));
     }
 
     public Funcionario updateFuncionario(Long id, FuncionarioDto funcionarioDto) {
@@ -49,6 +50,13 @@ public class funcionarioService {
     }
 
     public void deleteUser(Long id) {
-        funcionarioRepository.deleteById(id);
+        Optional<Funcionario> funcionarioOptional = funcionarioRepository.findById(id);
+        if (funcionarioOptional.isPresent()) {
+            Funcionario funcionario = funcionarioOptional.get();
+            funcionarioRepository.deleteById(funcionario.getId());
+        } else {
+            throw new FuncionarioNotFoundException("Funcionario não encontrado para a remoção");
+        }
     }
+    
 }

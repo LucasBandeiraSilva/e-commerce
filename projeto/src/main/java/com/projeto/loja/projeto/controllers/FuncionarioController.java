@@ -8,7 +8,7 @@ import com.projeto.loja.projeto.dto.FuncionarioDto;
 import com.projeto.loja.projeto.model.Funcionario;
 import com.projeto.loja.projeto.model.enums.RoleUser;
 import com.projeto.loja.projeto.repositories.FuncionarioRepository;
-import com.projeto.loja.projeto.services.funcionarioService;
+import com.projeto.loja.projeto.services.FuncionarioService;
 
 import jakarta.validation.Valid;
 
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping(value = "/funcionarios")
 public class FuncionarioController {
     @Autowired
-    private funcionarioService funcionarioService;
+    private FuncionarioService funcionarioService;
 
     @PostMapping()
     public ResponseEntity<Funcionario> create(@RequestBody @Valid FuncionarioDto funcionarioDto) {
