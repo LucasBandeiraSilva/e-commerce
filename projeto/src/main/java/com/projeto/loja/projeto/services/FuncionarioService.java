@@ -3,12 +3,13 @@ package com.projeto.loja.projeto.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.projeto.loja.projeto.dto.FuncionarioDTO;
+import com.projeto.loja.projeto.exceptions.FuncionarioNotFoundException;
 import com.projeto.loja.projeto.model.Funcionario;
 import com.projeto.loja.projeto.repositories.FuncionarioRepository;
 
@@ -22,9 +23,9 @@ public class FuncionarioService {
     public Funcionario createFuncionario(FuncionarioDTO funcionarioDto) {
         var funcionario = new Funcionario();
         BeanUtils.copyProperties(funcionarioDto, funcionario);
+        funcionarioRepository.save(funcionario);
         funcionario.setAtivo(true);
-        funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionarioDto.senha()));
-        return funcionarioRepository.save(funcionario);
+        return funcionario;
     }
 
     public List<Funcionario> findAll() {
@@ -33,7 +34,7 @@ public class FuncionarioService {
     }
 
     public Funcionario findById(Long id) {
-        return funcionarioRepository.findById(id).get();
+        return funcionarioRepository.findById(id).orElseThrow(()-> new FuncionarioNotFoundException("Id não encontrado"));
     }
 
     public Funcionario updateFuncionario(Long id, FuncionarioDTO funcionarioDto) {
@@ -49,6 +50,13 @@ public class FuncionarioService {
     }
 
     public void deleteUser(Long id) {
-        funcionarioRepository.deleteById(id);
+        Optional<Funcionario> funcionarioOptional = funcionarioRepository.findById(id);
+        if (funcionarioOptional.isPresent()) {
+            Funcionario funcionario = funcionarioOptional.get();
+            funcionarioRepository.deleteById(funcionario.getId());
+        } else {
+            throw new FuncionarioNotFoundException("Funcionario não encontrado para a remoção");
+        }
     }
+    
 }

@@ -29,9 +29,16 @@ public class Funcionario extends Usuario {
     @Enumerated(EnumType.STRING)
     private RoleUser role;
     private boolean ativo;
+    
 
     @Transient
     private String login;
+
+    public Funcionario(Long id, RoleUser roleUser, boolean ativo){
+        this.id = id;
+        this.role = roleUser;
+        this.ativo = ativo;
+    }
 
     public String getLogin(){
         return getEmail();
