@@ -21,7 +21,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.BeanUtils;
 
-import com.projeto.loja.projeto.dto.FuncionarioDto;
+import com.projeto.loja.projeto.dto.FuncionarioDTO;
 import com.projeto.loja.projeto.exceptions.FuncionarioNotFoundException;
 import com.projeto.loja.projeto.model.Funcionario;
 import com.projeto.loja.projeto.model.enums.RoleUser;
@@ -38,12 +38,12 @@ public class ClienteTest {
     private FuncionarioRepository funcionarioRepository;
 
     Funcionario funcionario;
-    FuncionarioDto funcionarioDto;
+    FuncionarioDTO funcionarioDto;
 
     @BeforeEach
     public void setUp() {
-        funcionarioDto = new FuncionarioDto("Lucas", "lucas@teste", "51450237827", "Lucas123", RoleUser.ADMIN);
-        funcionario = new Funcionario(1L, RoleUser.ADMIN, true);
+         var funcionarioDto = new FuncionarioDTO("Lucas", "lucas@teste", "51450237827", "Lucas123", RoleUser.ADMIN);
+        var funcionario = new Funcionario(1L, RoleUser.ADMIN, true);
         BeanUtils.copyProperties(funcionarioDto, funcionario);
     }
 

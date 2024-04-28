@@ -8,7 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.projeto.loja.projeto.dto.FuncionarioDto;
+import com.projeto.loja.projeto.dto.FuncionarioDTO;
 import com.projeto.loja.projeto.exceptions.FuncionarioNotFoundException;
 import com.projeto.loja.projeto.model.Funcionario;
 import com.projeto.loja.projeto.repositories.FuncionarioRepository;
@@ -20,7 +20,7 @@ public class FuncionarioService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
-    public Funcionario createFuncionario(FuncionarioDto funcionarioDto) {
+    public Funcionario createFuncionario(FuncionarioDTO funcionarioDto) {
         var funcionario = new Funcionario();
         BeanUtils.copyProperties(funcionarioDto, funcionario);
         funcionarioRepository.save(funcionario);
@@ -37,7 +37,7 @@ public class FuncionarioService {
         return funcionarioRepository.findById(id).orElseThrow(()-> new FuncionarioNotFoundException("Id não encontrado"));
     }
 
-    public Funcionario updateFuncionario(Long id, FuncionarioDto funcionarioDto) {
+    public Funcionario updateFuncionario(Long id, FuncionarioDTO funcionarioDto) {
         Optional<Funcionario> funcionarioOptional = funcionarioRepository.findById(id);
 
         if (funcionarioOptional.isPresent()) {
