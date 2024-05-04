@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                .authorizeHttpRequests(authorize -> {
                    authorize.requestMatchers("/auth/login").permitAll();
                    authorize.requestMatchers("/funcionarios/**").hasRole("ADMIN");
-                   authorize.anyRequest().authenticated();
+                   authorize.anyRequest().permitAll();
                })
                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                .build();
