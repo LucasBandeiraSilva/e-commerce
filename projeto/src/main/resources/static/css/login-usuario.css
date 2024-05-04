@@ -1,0 +1,114 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-size: 12px;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    text-align: center;
+    justify-content: center; 
+    align-items: center; 
+ 
+}
+
+#banner-container, #login-container {
+        width: 50%;
+        height: 100%;
+}
+
+#login-container{
+    position: relative;
+}
+
+
+#banner-container {
+    background-color: #2C3E50;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+#image-banner{
+    max-width: 50%;
+    max-height: 50%;
+    display: block;
+}
+
+#logo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 10%;
+    max-height: 10%;
+}
+
+#login-form{
+    margin: 15% 20%;
+    min-height: 75%;
+}
+
+h1 {
+    font-family: 'Bree Serif';
+    size: 40;
+    margin: 0% 60% 0% 0%;
+    font: bold;
+}
+
+p {
+    font-family: 'Bree Serif';
+    size: 16px;
+    font: bold;
+    text-align: justify; 
+    color: #868686;
+    margin-left: 8%;
+}
+
+.btn-primary{
+    background-color: #2C3E50 !important; 
+    color: #FFFFFF;
+}
+
+form > label {
+    font-family: 'Bree Serif';
+    margin: 0% 70% 0% 0%;
+    color: #535353;
+}
+
+form > input {
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+form > div > button {
+    max-height: 100%;
+    margin-top: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#voltar-btn {
+    position: absolute; /* Define a posição absoluta para o botão */
+    top: 0; /* Alinha o botão no topo da div de login */
+    left: 0; /* Alinha o botão à esquerda da div de login */
+    background-color: transparent; /* Define o fundo transparente */
+    border: none; /* Remove a borda */
+    text-align: left;
+}
+
+#voltar-btn img {
+    max-width: 30px;
+    margin-right: 0px;
+}
+
+
+
+
+
+
